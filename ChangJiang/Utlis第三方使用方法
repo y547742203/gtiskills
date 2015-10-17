@@ -1,0 +1,43 @@
+
+使用时都要导入相应头文件
+
+✳️ Common
+
+    ［[Common shared］ showAlert:@"xxx"]   //带有确认按钮的ALert提示框
+     [[Common share]  Alert:@"xxx"]       //自动消失的Alert提示框
+
+✳️ CustomIOSAlertView    //带有旋转标示的Alert，并且可以在特定时候关闭提示框
+
+    CustomIOSAlertView* loadAlert = [[CustomIOSAlertView alloc] init];
+    [loadAlert SetCOntainerView:[loadAlert createDemoViewWithLoadText:@"xxx"]]
+    /*显示*/
+    [loadAlert show];
+    /*关闭*/
+    [loadALert close];
+
+✳️ Reachability     // 检查联网状况
+
+    if(![Reachability ifConnect])
+    {
+    //提示
+    [[Common shared] alert:@"联网失败，请检查网路状态"];
+    }
+
+✳️ MIJDIYHeader  //下拉刷新插件  可用于 tableview scrollview 等列表UI
+
+
+    //初始化  myTableView为TableVIew的Outlet
+    self.myTableView.header = [MJDIYHeader headerWithRefreshingBlock:^{
+        NSLog(@"请求商户信息");
+        [self GetMerchantDataFromWeb];
+    }];
+
+    //刷新
+   ［tableview.header beginRefreshing］
+    //结束刷新  一般当请求服务器数据结束之后 结束刷新
+    [tableview.header endRefreshing]
+
+✳️  联网请求 AFNetWorking
+     可以在网上查看具体如何使用，一般都要配合 Common 等提示插件配合使用
+
+✳️ MBProgressHUD 因为有了Common，统一一下不建议用，但灵活性比Common高 如后期UI有需要修改提示，则再同意修改
